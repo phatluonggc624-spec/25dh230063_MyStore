@@ -1,0 +1,48 @@
+﻿@model IEnumerable<_25dh230063_MyStore.Models.Category>
+
+@{ 
+    ViewBag.Title = "Index";
+   
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />*@
+
+<h2 class="bg-success"> DANH SÁCH DANH MỤC</h2>
+
+<table class="table bg-info col-md-6">
+    <tr>
+        <th class="bg-success">
+            @*@Html.DisplayNameFor(model => model.CategoryName)*@
+            TÊN DANH MỤC
+        </th>
+        <th class="bg-success">CHỨC NĂNG</th>
+    </tr>
+
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })  |
+
+                @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+
+</p>
