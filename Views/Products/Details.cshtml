@@ -1,41 +1,45 @@
 ﻿@model _25dh230063_MyStore.Models.Product
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Areas/Admin/View/Shared/_AdminLayout.cshtml"; 
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+<style>
+    .product-detail-img {
+        max-width: 100%;
+        height: auto;
+        max-height: 400px;
+    }
+</style>
 
+<h2 class="bg-success bg-opacity-25 p-2 my-3">CHI TIẾT SẢN PHẨM</h2>
 
+<div class="row">
+    <!-- Cột trái: ảnh -->
+    <div class="col-md-4 text-center">
+        <img src="@Model.ProductImage" alt="@Model.ProductName" class="product-detail-img" />
+    </div>
 
-<h2> CHI TIẾT SẢN PHẨM</h2>
-   h4> <div>
-       
-        <dl class="dl-horizontal">
-
+    <!-- Cột phải: thông tin -->
+    <div class="col-md-8">
+        <dl>
             <dt>Tên sản phẩm</dt>
-            <dd> @Html.DisplayFor(model => model.ProductName)</dd>
+            <dd>@Model.ProductName</dd>
 
-           
             <dt>Mô tả</dt>
-            <dd> @Html.DisplayFor(model => model.ProductDescription) </dd>
+            <dd>@Model.ProductDescription</dd>
 
             <dt>Đơn giá</dt>
-            <dd>  @Html.DisplayFor(model => model.ProductPrice)</dd> 
-
-            <dt> Hình ảnh</dt>
-            <dd>@Html.DisplayFor(model => model.ProductImage) </dd>
+            <dd>@string.Format("{0:N0} đ", Model.ProductPrice)</dd>
 
             <dt>Danh mục</dt>
-            <dd>  @Html.DisplayFor(model => model.Category.CategoryName)</dd>
-
+            <dd>@Model.Category.CategoryName</dd>
         </dl>
+
+        <div class="mt-4">
+            @Html.ActionLink("Sửa", "Edit", new { id = Model.ProductID }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-primary" })
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Sửa", "Edit", new { id = Model.ProductID },
-        new { @class = "btn btn-primary btn-sm" })  |
-        @Html.ActionLink("Quay lại danh sách", "Index", null,
-       new { @class = "btn btn-primary btn-sm" })
-
-    </p>
-
+</div>
