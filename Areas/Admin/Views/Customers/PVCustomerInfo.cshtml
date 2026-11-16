@@ -1,0 +1,22 @@
+﻿@model _25dh230063_MyStore.Models.Customer
+
+<div class="container-fluid">
+    <div class="row bg-info bg-opacity-25 p-3">
+        <dl>
+            <dt>Họ và tên</dt>
+            <dd>@Html.DisplayFor(model => model.CustomerName)</dd>
+
+            <dt>Số điện thoại</dt>
+            <dd>@Html.DisplayFor(model => model.CustomerPhone)</dd>
+
+            <dt>Email</dt>
+            <dd>@Html.DisplayFor(model => model.CustomerEmail)</dd>
+
+            <dt>Địa chỉ</dt>
+            <dd>@Html.DisplayFor(model => model.CustomerAddress)</dd>
+
+            <dt>Tên đăng nhập</dt>
+            <dd>@Html.DisplayFor(model => model.Username)</dd>
+        </dl>
+    </div>
+</div>

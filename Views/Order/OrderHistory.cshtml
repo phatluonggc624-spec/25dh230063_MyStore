@@ -1,0 +1,38 @@
+﻿@model List<_25dh230063_MyStore.Models.Order>
+@{
+    ViewBag.Title = "Lịch sử mua hàng";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<h2 style="margin-top: 20px;">Lịch sử mua hàng của bạn</h2>
+
+@if (Model.Count == 0)
+{
+    <p>Bạn chưa có đơn hàng nào. <a href="@Url.Action("Index", "Home")">Mua sắm ngay</a></p>
+}
+else
+{
+    <table style="width: 100%; border-collapse: collapse; background: white; margin-top: 20px;">
+        <thead>
+            <tr style="background: #ffcf00; text-align: left;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Mã ĐH</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Ngày đặt</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Tổng tiền</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Địa chỉ nhận</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">#@item.OrderID</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@item.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; color: red; font-weight: bold;">@item.TotalAmount.ToString("N0") đ</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@item.AddressDelivery</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@item.PaymentStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

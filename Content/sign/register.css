@@ -1,0 +1,108 @@
+﻿
+
+.LEGO {
+    width: 50px;
+    display: block;
+    margin: auto;
+}
+
+body {
+    background-color: #808080;
+    font-family: Arial;
+}
+
+.container {
+    position: relative;
+    width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+h4 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid #ccc; /* Thêm viền xám nhẹ cho đẹp */
+}
+input[type="checkbox"] {
+    width: auto;
+}
+
+
+
+
+button {
+    width: 50%;
+    padding: 15px;
+    background-color: #0094ff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+}
+
+    button:hover {
+        background-color: darkred;
+    }
+
+#message {
+    text-align: center;
+}
+
+.login {
+    text-align: center;
+}
+
+a {
+    color: red;
+    text-decoration: none;
+}
+
+.dangnhap {
+    color: blue;
+    text-align: center;
+}
+
+.thoat {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 35px;
+    color: #6699ff;
+    text-decoration: none;
+    line-height: normal;
+}
+
+    .thoat:hover {
+        color: #0026ff;
+    }
+
+.login-text {
+    text-align: center;
+    font-size: 18px;
+}
+
+    .login-text a {
+        color: #356bb5;
+        text-decoration: underline;
+    }

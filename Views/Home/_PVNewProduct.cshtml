@@ -1,0 +1,28 @@
+﻿@model _25dh230063_MyStore.Models.ViewModel.HomeProductVM
+@using PagedList.Mvc;
+
+@if (Model.NewProducts != null && Model.NewProducts.Any())
+{
+    <div class="product-list">
+        @foreach (var product in Model.NewProducts)
+        {
+            <div class="product-item">
+                <a href="@Url.Action("ProductDetail", "Home", new { id = product.ProductID })">
+                    <img src="@(string.IsNullOrEmpty(product.ProductImage) ? Url.Content("~/Content/images/default_img.jpg") : (product.ProductImage.StartsWith("http") ? product.ProductImage : Url.Content("~/Content/images/" + product.ProductImage)))" alt="@product.ProductName" />
+                    <h3>@product.ProductName</h3>
+                </a>
+                <p class="product-price">@product.ProductPrice.ToString("N0") đ</p>
+
+                <form action="/Cart/AddItem" method="post">
+                    <input type="hidden" name="productId" value="@product.ProductID" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn-add-cart">Thêm vào giỏ</button>
+                </form>
+            </div>
+        }
+    </div>
+
+    <div class="pagination">
+        @Html.PagedListPager(Model.NewProducts, page => Url.Action("Index", new { page, searchTerm = Model.SearchTerm }))
+    </div>
+}

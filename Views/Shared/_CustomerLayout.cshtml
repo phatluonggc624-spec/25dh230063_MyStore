@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My Store</title>
+    <link href="~/Content/myStyle/CustomerHome.css" rel="stylesheet" type="text/css" />
+    <!-- Thêm dòng này để các trang con có thể chèn CSS riêng -->
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-content">
+            <!-- Logo -->
+            <a href="@Url.Action("Index", "Home")" class="logo">MY STORE</a>
+
+            <!-- Thanh tìm kiếm nhỏ -->
+            <form action="@Url.Action("Index", "Home")" method="get" class="search-form">
+                <input type="text" name="searchTerm" placeholder="Tìm sản phẩm..." />
+                <button type="submit">Tìm</button>
+            </form>
+
+            <!-- Tài khoản & Giỏ hàng -->
+            <div class="header-links">
+                <a href="@Url.Action("Index", "Cart")">🛒 Giỏ hàng</a>
+
+                @if (Session["CustomerID"] != null)
+                {
+                    <span>Chào, <b>@Session["CustomerName"]</b></span>
+
+                    <!-- THÊM NÚT LỊCH SỬ MUA HÀNG VÀO ĐÂY -->
+                    <a href="@Url.Action("OrderHistory", "Order")" style="color: #1a73e8; font-weight: bold;">📜 Lịch sử mua</a>
+
+                    <a href="@Url.Action("Logout", "Account")">Đăng xuất</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")">Đăng nhập</a>
+                    <a href="@Url.Action("Register", "Account")">Đăng ký</a>
+                }
+            </div>
+        </div>
+    </header>
+
+    <!-- BODY CHÍNH -->
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© @DateTime.Now.Year - Đồ án MyStore</p>
+    </footer>
+
+    <!-- Thêm dòng này để các trang con có thể chèn Script riêng (như jqueryval) -->
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@model _25dh230063_MyStore.Models.ViewModel.RegisterVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta name="viewport" content="width=device-width" charset="UTF-8" />
+    <title>Đăng ký tài khoản - LEGO</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/sign/register.css")?v=4" />
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo LEGO -->
+        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/1280px-LEGO_logo.svg.png" alt="LEGO" class="LEGO">
+
+        <h1>Tạo tài khoản LEGO®</h1>
+        <h4>Bạn đã có tài khoản chưa?</h4>
+        <p class="login-text">
+            <!-- Đã sửa lại link trỏ đúng về trang Login của Account -->
+            <a href="@Url.Action("Login", "Account")">Đăng nhập</a>
+        </p>
+
+        <!-- Form gửi dữ liệu về Controller -->
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm" }))
+        {
+            @Html.ValidationSummary(true, "", new { style = "color: red; text-align: center; margin-bottom: 15px;" })
+
+            <!-- Tên đăng nhập (Bắt buộc phải thêm vì DB yêu cầu) -->
+            <label>Tên đăng nhập (Username):</label>
+            @Html.TextBoxFor(m => m.Username, new { placeholder = "Nhập tên đăng nhập (viết liền không dấu)", required = "required" })
+            @Html.ValidationMessageFor(m => m.Username, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <!-- Họ và Tên -->
+            <label>Họ và Tên:</label>
+            @Html.TextBoxFor(m => m.CustomerName, new { placeholder = "Viết họ và tên của bạn", required = "required" })
+            @Html.ValidationMessageFor(m => m.CustomerName, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <!-- Email -->
+            <label>Email:</label>
+            @Html.TextBoxFor(m => m.CustomerEmail, new { type = "email", placeholder = "Nhập email", required = "required" })
+            @Html.ValidationMessageFor(m => m.CustomerEmail, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <!-- Số điện thoại -->
+            <label>Số điện thoại:</label>
+            @Html.TextBoxFor(m => m.CustomerPhone, new { placeholder = "Nhập số điện thoại", required = "required" })
+            @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <!-- Địa chỉ -->
+            <label>Địa chỉ:</label>
+            @Html.TextBoxFor(m => m.CustomerAddress, new { placeholder = "Nhập địa chỉ giao hàng", required = "required" })
+            @Html.ValidationMessageFor(m => m.CustomerAddress, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <!-- Mật khẩu -->
+            <label>Mật khẩu:</label>
+            @Html.PasswordFor(m => m.Password, new { placeholder = "********", required = "required" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <!-- Nhập lại mật khẩu -->
+            <label>Nhập lại mật khẩu:</label>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "********", required = "required" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <p style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" id="agree" required style="width: auto;">
+                <span>Tôi đồng ý với điều khoản</span>
+            </p>
+
+            <button type="submit">Vâng, hãy tạo tài khoản!</button>
+        }
+
+        <!-- Nút thoát quay về trang chủ -->
+        <a href="@Url.Action("Index", "Home")" class="thoat">
+            ←
+        </a>
+    </div>
+
+    <!-- Giữ lại file script nếu bạn có dùng -->
+    <script src="@Url.Content("~/Scripts/register.js")"></script>
+</body>
+</html>

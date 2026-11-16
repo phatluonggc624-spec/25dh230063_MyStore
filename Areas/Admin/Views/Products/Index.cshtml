@@ -1,0 +1,55 @@
+﻿@model _25dh230063_MyStore.Models.ViewModel.ProductSearchVM
+
+@{
+    ViewBag.Title = "Search Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@* Form tìm kiếm *@
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{
+    <div class="row g-2 justify-content-center my-3">
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.SearchTerm, new
+            {
+                @class = "form-control",
+                placeholder = "Nhập tên, mô tả hoặc chủng loại sản phẩm"
+            })
+        </div>
+        <div class="col-md-2">
+            @Html.TextBoxFor(m => m.MinPrice, new
+            {
+                @class = "form-control",
+                placeholder = "Nhập giá tối thiểu"
+            })
+        </div>
+        <div class="col-md-2">
+            @Html.TextBoxFor(m => m.MaxPrice, new
+            {
+                @class = "form-control",
+                placeholder = "Nhập giá tối đa"
+            })
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        </div>
+    </div>
+
+    @* Giữ lại thứ tự sắp xếp hiện tại khi bấm Tìm kiếm *@
+    @Html.HiddenFor(m => m.SortOrder)
+}
+
+@* Tùy chọn sắp xếp *@
+<div class="text-center my-2">
+    Sắp xếp theo:
+    @Html.ActionLink("Tên tăng dần", "Index", new { sortOrder = "name_asc", searchTerm = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice })
+    |
+    @Html.ActionLink("Tên giảm dần", "Index", new { sortOrder = "name_desc", searchTerm = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice })
+    |
+    @Html.ActionLink("Giá tăng dần", "Index", new { sortOrder = "price_asc", searchTerm = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice })
+    |
+    @Html.ActionLink("Giá giảm dần", "Index", new { sortOrder = "price_desc", searchTerm = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice })
+</div>
+
+@* Kết quả tìm kiếm *@
+@Html.Partial("PVListProduct", Model)

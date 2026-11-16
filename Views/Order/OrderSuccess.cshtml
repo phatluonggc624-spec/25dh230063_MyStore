@@ -1,0 +1,17 @@
+﻿@model _25dh230063_MyStore.Models.Order
+@{
+    ViewBag.Title = "Đặt hàng thành công";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<div style="text-align: center; background: white; padding: 50px; border: 1px solid #ddd; margin-top: 30px;">
+    <h2 style="color: green;">🎉 Đặt hàng thành công!</h2>
+    <p>Cảm ơn bạn đã mua sắm. Mã đơn hàng của bạn là: <b>#@Model.OrderID</b></p>
+    <p>Tổng tiền: <b style="color: red;">@Model.TotalAmount.ToString("N0") đ</b></p>
+    <p>Địa chỉ giao: @Model.AddressDelivery</p>
+
+    <div style="margin-top: 30px;">
+        <a href="@Url.Action("Index", "Home")" style="background: #1a73e8; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Tiếp tục mua sắm</a>
+        <a href="@Url.Action("OrderHistory", "Order")" style="background: #eee; color: black; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-left: 10px;">Xem lịch sử mua hàng</a>
+    </div>
+</div>

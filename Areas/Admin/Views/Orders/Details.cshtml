@@ -1,0 +1,48 @@
+﻿@model IEnumerable<_25dh230063_MyStore.Models.OrderDetail>
+@{
+    ViewBag.Title = "Chi tiết Đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var orderInfo = ViewBag.OrderInfo as _25dh230063_MyStore.Models.Order;
+}
+
+<h2 class="bg-success" style="padding: 10px; color: white;">CHI TIẾT ĐƠN HÀNG #@orderInfo.OrderID</h2>
+
+<div class="row mb-4" style="margin-bottom: 20px; background: #f8f9fa; padding: 15px;">
+    <div class="col-md-6">
+        <p><b>Khách hàng:</b> @orderInfo.Customer.CustomerName</p>
+        <p><b>Số điện thoại:</b> @orderInfo.Customer.CustomerPhone</p>
+        <p><b>Địa chỉ giao:</b> @orderInfo.AddressDelivery</p>
+    </div>
+    <div class="col-md-6">
+        <p><b>Ngày đặt:</b> @orderInfo.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+        <p><b>Trạng thái:</b> @orderInfo.PaymentStatus</p>
+        <p><b>Tổng tiền:</b> <span style="color:red; font-weight:bold; font-size: 18px;">@orderInfo.TotalAmount.ToString("N0") đ</span></p>
+    </div>
+</div>
+
+<h4>Các sản phẩm trong đơn:</h4>
+<table class="table table-bordered">
+    <tr class="bg-info">
+        <th>Hình Ảnh</th>
+        <th>Tên Sản Phẩm</th>
+        <th>Đơn Giá</th>
+        <th>Số Lượng</th>
+        <th>Thành Tiền</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@(string.IsNullOrEmpty(item.Product.ProductImage) ? Url.Content("~/Content/images/default_img.jpg") : (item.Product.ProductImage.StartsWith("http") ? item.Product.ProductImage : Url.Content("~/Content/images/" + item.Product.ProductImage)))" style="width: 60px; height: 60px; object-fit: cover;" />
+            </td>
+            <td>@item.Product.ProductName</td>
+            <td>@item.UnitPrice.ToString("N0") đ</td>
+            <td>@item.Quantity</td>
+            <td style="color: red;">@((item.Quantity * item.UnitPrice).ToString("N0")) đ</td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary" })
+</p>

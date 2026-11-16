@@ -1,0 +1,39 @@
+﻿@model List<_25dh230063_MyStore.Models.CartItem>
+@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<h2 style="margin-top: 20px;">Xác nhận đặt hàng</h2>
+
+<div style="display: flex; gap: 30px; margin-top: 20px;">
+    <!-- Bên trái: Danh sách sản phẩm -->
+    <div style="flex: 1; background: white; padding: 20px; border: 1px solid #ddd;">
+        <h3>Đơn hàng của bạn</h3>
+        <ul style="list-style: none; padding: 0;">
+            @foreach (var item in Model)
+            {
+                <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #ccc; padding: 10px 0;">
+                    <span>@item.ProductName (x @item.Quantity)</span>
+                    <span style="font-weight: bold;">@item.TotalPrice.ToString("N0") đ</span>
+                </li>
+            }
+        </ul>
+        <h3 style="text-align: right; color: red; margin-top: 20px;">
+            Tổng cộng: @Model.Sum(x => x.TotalPrice).ToString("N0") đ
+        </h3>
+    </div>
+
+    <!-- Bên phải: Form điền địa chỉ -->
+    <div style="flex: 1; background: white; padding: 20px; border: 1px solid #ddd;">
+        <h3>Thông tin giao hàng</h3>
+        @using (Html.BeginForm("Checkout", "Order", FormMethod.Post))
+        {
+            <div style="margin-bottom: 15px;">
+                <label>Địa chỉ nhận hàng:</label>
+                <textarea name="addressDelivery" required rows="4" style="width: 100%; padding: 10px; border: 1px solid #ccc; margin-top: 5px;"></textarea>
+            </div>
+            <button type="submit" style="background: green; color: white; padding: 12px 20px; border: none; border-radius: 5px; width: 100%; font-size: 16px; cursor: pointer;">Xác nhận Đặt hàng</button>
+        }
+    </div>
+</div>

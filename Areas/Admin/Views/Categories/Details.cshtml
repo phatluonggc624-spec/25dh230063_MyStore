@@ -1,0 +1,58 @@
+﻿@model _25dh230063_MyStore.Models.Category
+@using System.Linq
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="bg-success">CHI TIẾT DANH MỤC</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+    </dl>
+</div>
+
+<h4 class="mt-3">Sản phẩm thuộc danh mục</h4>
+
+@if (Model.Products != null && Model.Products.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="background-color:#e2f0d9">Hình ảnh</th>
+                <th style="background-color:#e2f0d9">Tên sản phẩm</th>
+                <th style="background-color:#e2f0d9">Đơn giá</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.Products)
+            {
+                <tr>
+                    <td style="background-color:#d9edf7">
+                        <img src="@Url.Content(string.IsNullOrEmpty(p.ProductImage) ? "~/Content/images/default_img.jpg" : p.ProductImage)"
+                             alt="@p.ProductName" style="height:80px; max-width:80px; object-fit:contain;" />
+                    </td>
+                    <td style="background-color:#d9edf7">@p.ProductName</td>
+                    <td style="background-color:#d9edf7">@string.Format("{0:N0} đ", p.ProductPrice)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Chưa có sản phẩm nào thuộc danh mục này.</p>
+}
+
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.CategoryID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-primary" })
+</p>

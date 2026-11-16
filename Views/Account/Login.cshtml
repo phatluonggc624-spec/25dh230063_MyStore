@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta name="viewport" content="width=device-width" charset="UTF-8" />
+    <title>Đăng nhập - LEGO</title>
+
+    <!-- ĐÃ SỬA ĐƯỜNG DẪN: Thêm chữ /sign/ vào trước tên file -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/sign/login.css")?v=3" />
+</head>
+
+<body>
+    <div class="container">
+        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/1280px-LEGO_logo.svg.png" alt="LEGO" class="LEGO">
+
+        <h1>Đăng nhập</h1>
+
+        <!-- Hiển thị thông báo lỗi nếu sai tài khoản -->
+        @if (ViewBag.Error != null)
+        {
+            <div style="color: red; text-align: center; font-weight: bold; margin-bottom: 15px;">@ViewBag.Error</div>
+        }
+
+        <!-- Form gửi dữ liệu về AccountController -->
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { id = "loginForm" }))
+        {
+            <label>Tên đăng nhập:</label>
+            <!-- BẮT BUỘC phải có name="username" -->
+            <input type="text" name="username" placeholder="Nhập tên đăng nhập" required />
+            <br><br>
+
+            <label>Mật khẩu:</label>
+            <!-- BẮT BUỘC phải có name="password" -->
+            <input type="password" name="password" placeholder="******" required />
+            <br>
+
+            <p class="forgot">
+                <a href="#">Quên mật khẩu?</a>
+            </p>
+
+            <button type="submit">ĐĂNG NHẬP</button>
+        }
+
+        <p class="register">
+            Bạn chưa có tài khoản?
+            <!-- Trỏ đúng về trang Đăng ký của Account -->
+            <a href="@Url.Action("Register", "Account")">Tạo tài khoản</a>
+        </p>
+
+        <!-- Nút quay lại trỏ về Trang chủ -->
+        <a href="@Url.Action("Index", "Home")" class="thoat">←</a>
+    </div>
+</body>
+</html>

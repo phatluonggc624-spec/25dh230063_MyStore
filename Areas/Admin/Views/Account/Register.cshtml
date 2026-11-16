@@ -1,0 +1,69 @@
+﻿@model _25dh230063_MyStore.Models.ViewModel.RegisterVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta name="viewport" content="width=device-width" charset="UTF-8" />
+    <title>Đăng ký Admin - LEGO</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/sign/register.css")?v=4" />
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/1280px-LEGO_logo.svg.png" alt="LEGO" class="LEGO">
+
+        <h1>Tạo tài khoản Admin</h1>
+        <h4>Bạn đã có tài khoản chưa?</h4>
+        <p class="login-text">
+            <a href="@Url.Action("Login", "Account", new { area = "Admin" })">Đăng nhập</a>
+        </p>
+
+        @using (Html.BeginForm("Register", "Account", new { area = "Admin" }, FormMethod.Post, new { id = "registerForm" }))
+        {
+            @Html.ValidationSummary(true, "", new { style = "color: red; text-align: center; margin-bottom: 15px;" })
+
+            <label>Tên đăng nhập:</label>
+            @Html.TextBoxFor(m => m.Username, new { placeholder = "Nhập tên đăng nhập (viết liền không dấu)", required = "required" })
+            @Html.ValidationMessageFor(m => m.Username, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <label>Họ và Tên:</label>
+            @Html.TextBoxFor(m => m.CustomerName, new { placeholder = "Viết họ và tên của bạn", required = "required" })
+            @Html.ValidationMessageFor(m => m.CustomerName, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <label>Email:</label>
+            @Html.TextBoxFor(m => m.CustomerEmail, new { type = "email", placeholder = "Nhập email", required = "required" })
+            @Html.ValidationMessageFor(m => m.CustomerEmail, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <label>Số điện thoại:</label>
+            @Html.TextBoxFor(m => m.CustomerPhone, new { placeholder = "Nhập số điện thoại", required = "required" })
+            @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <label>Địa chỉ:</label>
+            @Html.TextBoxFor(m => m.CustomerAddress, new { placeholder = "Nhập địa chỉ giao hàng", required = "required" })
+            @Html.ValidationMessageFor(m => m.CustomerAddress, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <label>Mật khẩu:</label>
+            @Html.PasswordFor(m => m.Password, new { placeholder = "********", required = "required" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <label>Nhập lại mật khẩu:</label>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "********", required = "required" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { style = "color: red; font-size: 13px;" })
+            <br /><br />
+
+            <button type="submit">Vâng, hãy tạo tài khoản!</button>
+        }
+
+        <a href="@Url.Action("Index", "Home", new { area = "" })" class="thoat">←</a>
+    </div>
+</body>
+</html>

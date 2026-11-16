@@ -1,0 +1,90 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MY STORE</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+
+        .customer-navbar {
+            background-color: #263746;
+            border-color: #263746;
+        }
+
+            .customer-navbar .navbar-brand {
+                color: white;
+                font-weight: bold;
+            }
+
+            .customer-navbar .navbar-nav > li > a {
+                color: white;
+            }
+
+                .customer-navbar .navbar-brand:hover,
+                .customer-navbar .navbar-nav > li > a:hover {
+                    color: #d9edf7;
+                }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top customer-navbar">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse"
+                        data-target="#customerMenu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                @Html.ActionLink("MY STORE", "Index", "Home",
+                         new { area = "" },
+                         new { @class = "navbar-brand" })
+            </div>
+
+            <div class="navbar-collapse collapse" id="customerMenu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @Html.ActionLink("Trang chủ", "Index", "Home")
+                    </li>
+                    <li><a href="#">Sản phẩm</a></li>
+                    <li><a href="#">Danh mục</a></li>
+                    <li><a href="#">Giỏ hàng</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Đăng nhập</a></li>
+                    <li><a href="#">Đăng ký</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+
+        <hr />
+
+        <footer>
+            <p>&copy; @DateTime.Now.Year - MY STORE</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
